@@ -99,9 +99,9 @@ public class DBHandler extends SQLiteOpenHelper {
             if (cursor.moveToFirst()) {
                 do {
                     int index = cursor.getColumnIndex(COMENTARIO_COL);
-                    Toast.makeText(context, "eL INDEX ES "+index, Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(context, "eL INDEX ES "+index, Toast.LENGTH_SHORT).show();
                      texto = (cursor.getString(index));
-                    Toast.makeText(context, "eL texto ES "+texto, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(context, "eL texto ES "+texto, Toast.LENGTH_SHORT).show();
                 } while (cursor.moveToNext());
             }
         }
@@ -111,14 +111,16 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     public void borrarComentario(String comentarioTitulo) {
-            try{
-                SQLiteDatabase db = this.getWritableDatabase();
-                String[] args = { comentarioTitulo };
-                db.execSQL("delete  from 'tabla' where titulo=?", args);
-                db.close();
-            } catch (Exception e){
-                e.printStackTrace();
-            }
+
+        try{
+           SQLiteDatabase db = this.getWritableDatabase();
+            String[] args = { comentarioTitulo };
+            db.execSQL("delete  from 'tabla' where titulo=?", args);
+            db.close();
+            Toast.makeText(context, "Comentario borrado", Toast.LENGTH_SHORT).show();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
 
     }
 

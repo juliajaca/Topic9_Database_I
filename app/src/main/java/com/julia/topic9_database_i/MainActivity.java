@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
         // creating a new dbhandler class and passing our context to it.
         dbHandler = new DBHandler(MainActivity.this);
+        Log.d("Con", "el titulo des" + tituloCaja.getText().toString());
 
         // //------------------------------BOTON AÑADIR COMENTARIO
         addCommentBtn.setOnClickListener(new View.OnClickListener() {
@@ -53,7 +54,8 @@ public class MainActivity extends AppCompatActivity {
                 String comentario = comentarioCaja.getText().toString();
 
                 // validating if the text fields are empty or not.
-                if (titulo.isEmpty() && comentario.isEmpty()) {
+                if ((titulo.isEmpty()|| titulo.length() == 0 || titulo.equals("") || titulo == null ) ||
+                        (  comentario.isEmpty() || comentario.length() == 0 || comentario.equals("") || comentario == null)) {
                     Toast.makeText(MainActivity.this, "Please enter all the data..", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -75,24 +77,31 @@ public class MainActivity extends AppCompatActivity {
         verBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(comentarios.size() == 0){
+                    Toast.makeText(MainActivity.this, "No hay nada que mostrar", Toast.LENGTH_SHORT).show();
+                }else{
                 String stringTitulo = comentarios.get(positionTituloSeleccionado);
                 Log.d("CON", stringTitulo);
                 String resultado = dbHandler.buscarComentario(stringTitulo);
                 Log.d("CON", resultado);
                 comentarioBuscadoCaja.setText(resultado);
-            }
+            }}
         });
 
         //------------------------------BOTON BORRAR
         borrarBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String stringTitulo = comentarios.get(positionTituloSeleccionado);
-                dbHandler.borrarComentario(stringTitulo);
-                Toast.makeText(MainActivity.this, "Comment deleted...", Toast.LENGTH_SHORT).show();
-                //actualizar el spinner
-                comentarios = dbHandler.getProducts();
-                arrayAdapter.notifyDataSetChanged();
+                if(comentarios.size() == 0){
+                    Toast.makeText(MainActivity.this, "No hay nada que borrar", Toast.LENGTH_SHORT).show();
+                }else{
+                    String stringTitulo = comentarios.get(positionTituloSeleccionado);
+                     dbHandler.borrarComentario(stringTitulo);
+                    //actualizar el spinner
+                    comentarios = dbHandler.getProducts();
+                    arrayAdapter.notifyDataSetChanged();
+                    comentarioBuscadoCaja.setText(" ");
+                }
             }
         });
 

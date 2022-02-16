@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:orientation="vertical">
+    tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/label1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Creación de un nuevo comentario" />
@@ -17,47 +17,68 @@
         android:id="@+id/titulo"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:inputType="text"/>
+        android:singleLine="true"
+        android:maxLength="20"
+        android:inputType="textCapSentences"
+        android:hint ="Titulo de comentario"
+        android:layout_below="@+id/label1"/>
 
     <TextView
+        android:id="@+id/label2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Texto del nuevo comentario" />
+        android:text="Texto del nuevo comentario"
+        android:layout_below="@id/titulo"/>
+
 
     <EditText
+        android:layout_below="@id/label2"
         android:id="@+id/comentario"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:inputType="text"
-        />
+        android:inputType="textMultiLine|textCapSentences"
+        android:lines="5"
+        android:gravity="top|left"
+        android:maxLength ="400"
+        android:hint ="Escribe el comentario"
+        android:scrollHorizontally="false" />
+
 
     <Button
+        android:layout_below="@id/comentario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/botonCrear"
         android:text="GUARDAR"></Button>
 
     <TextView
+        android:id="@+id/label4"
+        android:layout_below="@id/botonCrear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Selecciona un comentario" />
     <Spinner
+        android:layout_below="@id/label4"
         android:id="@+id/spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <Button
+        android:layout_below="@id/spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/botonVer"
         android:text="VER"></Button>
 
     <TextView
+        android:layout_below="@id/botonVer"
+        android:id="@+id/label3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Este es tu comentario" />
 
     <EditText
+        android:layout_below="@id/label3"
         android:id="@+id/comentarioBuscado"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
@@ -65,11 +86,15 @@
         android:clickable="false"
         android:cursorVisible="false"
         android:focusable="false"
-        android:focusableInTouchMode="false"/>
+        android:focusableInTouchMode="false"
+        android:lines="5"
+        android:gravity="top|left"/>
 
     <Button
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/botonBorrar"
-        android:text="Borrar"></Button>
-</LinearLayout>
+        android:text="Borrar"
+        android:layout_alignParentBottom="true"></Button>
+</RelativeLayout>
